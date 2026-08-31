@@ -65,6 +65,11 @@ Estas restrições são verificadas automaticamente por regras ArchUnit
    anotada com `@Entity` pode estar fora desse pacote.
 8. **Não há ciclos de dependência entre pacotes.**
 
+> **Uso de Spring por camada.** A camada `domain` é a única totalmente livre de
+> framework. As camadas `application`, `infrastructure` e `presentation` podem
+> usar Spring: `application` utiliza `@Service` e `@Transactional` para
+> composição e controle transacional, mas **nunca** recursos de persistência.
+
 > **Persistência e domínio são objetos distintos.** As entidades de domínio são
 > classes Java puras. A camada de infraestrutura possui suas próprias entidades JPA
 > (sufixo `Entity`) e **mapeadores** que convertem entre os dois mundos. Não se
@@ -82,7 +87,7 @@ Estas restrições são verificadas automaticamente por regras ArchUnit
 | Mapeador (em `infrastructure`) | `<Entidade>Mapper` | `RepublicaMapper` |
 | Caso de uso (em `application`) | Verbo no infinitivo + `CasoDeUso` | `RegistrarDespesaCasoDeUso` |
 | Entrada de caso de uso | `<CasoDeUso>Entrada` | `RegistrarDespesaEntrada` |
-| Saída de caso de uso | `<CasoDeUso>Saida` | `RegistrarDespesaSaida` |
+| Saída de caso de uso | `<Entidade>Saida`, compartilhada pelos casos de uso do módulo | `LancamentoSaida` |
 | Controlador HTTP | `<Recurso>Controller` | `LancamentoController` |
 | Exceção de domínio | `<Motivo>Exception` | `VagaIndisponivelException` |
 | Classe de teste | `<ClasseTestada>Test` | `RepublicaTest` |
