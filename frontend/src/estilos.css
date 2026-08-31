@@ -1,0 +1,170 @@
+:root {
+  --cor-fundo: #f5f6f8;
+  --cor-superficie: #ffffff;
+  --cor-borda: #d9dde3;
+  --cor-texto: #1f2933;
+  --cor-texto-suave: #52606d;
+  --cor-destaque: #2f5d8f;
+  --cor-alerta: #b54708;
+  --cor-sucesso: #1f7a4d;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+.aplicacao {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.cabecalho h1 {
+  font-size: 1.5rem;
+  margin: 0 0 4px;
+}
+
+.cabecalho p {
+  margin: 0 0 20px;
+  color: var(--cor-texto-suave);
+}
+
+.abas {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--cor-borda);
+  margin-bottom: 20px;
+}
+
+.abas button {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: var(--cor-texto-suave);
+  cursor: pointer;
+}
+
+.abas button[aria-selected='true'] {
+  color: var(--cor-destaque);
+  border-bottom-color: var(--cor-destaque);
+  font-weight: 600;
+}
+
+.seletor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.seletor select {
+  padding: 6px 8px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+  background: var(--cor-superficie);
+  font-size: 0.9rem;
+}
+
+.cartao {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.cartao h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--cor-borda);
+  font-size: 0.9rem;
+}
+
+th {
+  background: #eef1f5;
+  font-weight: 600;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.etiqueta.pendente {
+  background: #fdf1e3;
+  color: var(--cor-alerta);
+}
+
+.etiqueta.pago {
+  background: #e6f4ec;
+  color: var(--cor-sucesso);
+}
+
+.etiqueta.estornado {
+  background: #eceff3;
+  color: var(--cor-texto-suave);
+}
+
+button.acao {
+  background: var(--cor-destaque);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+button.acao:disabled {
+  background: #b6c1cd;
+  cursor: not-allowed;
+}
+
+.mensagem {
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.mensagem.erro {
+  background: #fdecea;
+  color: #922;
+}
+
+.vazio {
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+  padding: 16px 0;
+}
