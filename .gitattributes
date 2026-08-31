@@ -1,0 +1,12 @@
+# Normaliza as quebras de linha no repositorio, garantindo que o conteudo
+# versionado seja identico independentemente do sistema operacional utilizado.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.pdf binary
+*.jar binary
+
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
