@@ -1,0 +1,26 @@
+spring:
+
+  datasource:
+    url: ${SPRING_DATASOURCE_TEST_URL:jdbc:postgresql://localhost:5432/republicas_test}
+    username: ${SPRING_DATASOURCE_USERNAME:republicas}
+    password: ${SPRING_DATASOURCE_PASSWORD:republicas}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    clean-disabled: false
+    locations: classpath:db/migration
+
+logging:
+  level:
+    root: WARN
+    br.ufes.republicas: INFO
+
+republicas:
+  log:
+    formato: CSV
+    diretorio: ./target/logs-teste
