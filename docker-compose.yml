@@ -34,6 +34,11 @@ services:
 
   # Ambiente de build e verificacao do backend.
   # Uso: docker compose run --rm build mvn -B verify
+  #
+  # Aponta deliberadamente para o banco de testes: as variaveis de ambiente tem
+  # precedencia sobre os arquivos de configuracao no Spring Boot, de modo que
+  # apontar este servico para o banco da aplicacao faria a suite de testes
+  # depender do estado deixado por execucoes anteriores da aplicacao.
   build:
     image: maven:3.9.9-eclipse-temurin-21
     container_name: republicas-build
@@ -42,8 +47,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/republicas
-      SPRING_DATASOURCE_TEST_URL: jdbc:postgresql://db:5432/republicas_test
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/republicas_test
       SPRING_DATASOURCE_USERNAME: republicas
       SPRING_DATASOURCE_PASSWORD: republicas
       # Fuso e locale fixos: garantem que testes sensiveis a data sejam estaveis.
@@ -53,6 +57,27 @@ services:
       - ./:/workspace
       - maven-repo:/root/.m2
     command: ["mvn", "-B", "verify"]
+
+  # Execucao da aplicacao, sobre o banco de dados da aplicacao.
+  # Uso: docker compose up app
+  app:
+    image: maven:3.9.9-eclipse-temurin-21
+    container_name: republicas-app
+    working_dir: /workspace/backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/republicas
+      SPRING_DATASOURCE_USERNAME: republicas
+      SPRING_DATASOURCE_PASSWORD: republicas
+      TZ: America/Sao_Paulo
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/workspace
+      - maven-repo:/root/.m2
+    command: ["mvn", "-B", "spring-boot:run"]
 
   # Ambiente de build do frontend.
   # Uso: docker compose run --rm frontend npm run build

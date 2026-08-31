@@ -87,7 +87,7 @@ export function Lancamentos({ republicaId }: Props) {
             {formatadorDeMoeda.format(lancamento.valor)} com vencimento em{' '}
             {formatarData(lancamento.dataVencimento)} · rateio por{' '}
             {lancamento.formaRateio === 'PERCENTUAL' ? 'percentual' : 'valor fixo'}
-            {lancamento.numeroParcela !== null &&
+            {lancamento.numeroParcela !== undefined &&
               ` · parcela ${lancamento.numeroParcela} de ${lancamento.totalParcelas}`}
           </p>
 
@@ -106,15 +106,17 @@ export function Lancamentos({ republicaId }: Props) {
                 <tr key={participacao.id}>
                   <td>{nomeDoMorador(participacao.moradorId)}</td>
                   <td>
-                    {participacao.percentual !== null
+                    {participacao.percentual !== undefined
                       ? `${participacao.percentual}%`
                       : formatadorDeMoeda.format(participacao.valorFixo ?? 0)}
                   </td>
                   <td>{formatadorDeMoeda.format(participacao.valorDevido)}</td>
                   <td>
-                    {participacao.pago
-                      ? `Pago em ${formatarData(participacao.dataPagamento ?? '')}`
-                      : 'Pendente'}
+                    {participacao.pago && participacao.dataPagamento
+                      ? `Pago em ${formatarData(participacao.dataPagamento)}`
+                      : participacao.pago
+                        ? 'Pago'
+                        : 'Pendente'}
                   </td>
                   <td>
                     <button

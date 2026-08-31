@@ -1,4 +1,10 @@
-/** Representacoes dos recursos devolvidos pela API REST. */
+/**
+ * Representacoes dos recursos devolvidos pela API REST.
+ *
+ * A API omite do corpo da resposta os campos sem valor. Por isso, todo campo
+ * opcional no dominio e declarado aqui como opcional, e nao apenas como
+ * anulavel: em tempo de execucao ele chega como `undefined`, e nao como `null`.
+ */
 
 export type TipoLancamento = 'RECEITA' | 'DESPESA'
 
@@ -29,11 +35,11 @@ export interface Republica {
 export interface Participacao {
   id: number
   moradorId: number
-  percentual: number | null
-  valorFixo: number | null
+  percentual?: number
+  valorFixo?: number
   valorDevido: number
   pago: boolean
-  dataPagamento: string | null
+  dataPagamento?: string
 }
 
 export interface Lancamento {
@@ -46,8 +52,8 @@ export interface Lancamento {
   dataCadastro: string
   periodicidade: Periodicidade
   formaRateio: FormaRateio
-  numeroParcela: number | null
-  totalParcelas: number | null
+  numeroParcela?: number
+  totalParcelas?: number
   status: StatusLancamento
   participacoes: Participacao[]
 }
@@ -56,17 +62,17 @@ export interface Morador {
   id: number
   nome: string
   apelido: string
-  republicaId: number | null
+  republicaId?: number
   semTeto: boolean
 }
 
 export interface Notificacao {
   id: number
   moradorId: number
-  republicaId: number | null
+  republicaId?: number
   tipo: TipoNotificacao
   mensagem: string
   lida: boolean
   dataCriacao: string
-  lancamentoId: number | null
+  lancamentoId?: number
 }

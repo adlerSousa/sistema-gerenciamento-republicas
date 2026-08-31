@@ -9,8 +9,12 @@ public class RecursoNaoEncontradoException extends DominioException {
         super(mensagem);
     }
 
+    /**
+     * Mensagem redigida sem flexao de genero, de modo a permanecer correta para
+     * qualquer recurso informado.
+     */
     public static RecursoNaoEncontradoException de(String recurso, Long id) {
         return new RecursoNaoEncontradoException(
-                "%s de identificador %d nao foi encontrado.".formatted(recurso, id));
+                "Nao existe %s com o identificador %d.".formatted(recurso, id));
     }
 }

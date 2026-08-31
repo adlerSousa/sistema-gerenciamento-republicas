@@ -104,12 +104,32 @@ docker compose down
 
 ## Como executar a aplicação
 
+Subir a API (o banco sobe junto):
+
 ```bash
-docker compose up -d db
-docker compose run --rm --service-ports build mvn -B spring-boot:run
+docker compose up app
 ```
 
 A API fica disponível em `http://localhost:8080/api`.
+
+Em outro terminal, subir a interface web:
+
+```bash
+docker compose run --rm --service-ports frontend npm run dev -- --host 0.0.0.0
+```
+
+A interface fica disponível em `http://localhost:5173`.
+
+Para recomeçar de um banco limpo, com a massa de dados inicial:
+
+```bash
+docker compose down -v
+```
+
+> O serviço `app` usa o banco `republicas` e o serviço `build` usa o banco
+> `republicas_test`. Essa separação é deliberada: os testes de integração
+> recriam o esquema a cada execução, de modo que o resultado nunca dependa do
+> estado deixado pela aplicação ou por execuções anteriores.
 
 ---
 

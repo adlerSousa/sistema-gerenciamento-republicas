@@ -1,7 +1,13 @@
+# Configuracao dos testes de integracao.
+#
+# O endereco do banco e definido pelo ambiente canonico (servico "build" do
+# docker-compose), que aponta para o banco de testes. O valor abaixo serve
+# apenas como padrao para execucoes fora daquele ambiente.
+
 spring:
 
   datasource:
-    url: ${SPRING_DATASOURCE_TEST_URL:jdbc:postgresql://localhost:5432/republicas_test}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/republicas_test}
     username: ${SPRING_DATASOURCE_USERNAME:republicas}
     password: ${SPRING_DATASOURCE_PASSWORD:republicas}
 
