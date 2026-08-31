@@ -35,3 +35,6 @@ desktop.ini
 # --- Artefatos temporarios ---
 tmp/
 *.tmp
+
+# Saida da sequencia de verificacao
+target-verificacao/
